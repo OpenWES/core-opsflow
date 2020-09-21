@@ -22,12 +22,14 @@ public class BaseOpsFlowInitializer implements Initializer {
     @Override
     public void onStart(Config config) throws Exception {
         StateFlowManager.instance()
+                //Workflow of NoneCacheActor
                 .register(StateFlow.create(NoneCacheActor.class.getName())
                         .addTransition(Transition.fromAny()
                                 .setAction(ActionName.LOGIN)
                                 .setTo("LOGIN")
                                 .setProcessor(LoginProcessor.class)
                                 .setDestroyOnComplete(true)))
+                //Workflow of BaseWorkingSession
                 .register(StateFlow.create(BaseWorkingSession.class.getName())
                         .addTransition(Transition.from("LOGIN")
                                 .setTo("SCAN_EQUIPMENT")
