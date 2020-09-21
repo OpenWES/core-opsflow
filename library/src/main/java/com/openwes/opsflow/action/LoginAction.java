@@ -8,8 +8,8 @@ import com.openwes.statemachine.Action;
  */
 public class LoginAction extends Action {
 
-    public LoginAction(String actorId) {
-        super(actorId, ActionName.LOGIN);
+    public LoginAction(String actorId, Object data) {
+        super(actorId, ActionName.LOGIN, data);
     }
 
 }
