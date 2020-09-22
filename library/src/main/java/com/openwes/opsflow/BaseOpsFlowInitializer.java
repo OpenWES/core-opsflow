@@ -2,7 +2,7 @@ package com.openwes.opsflow;
 
 import com.openwes.core.interfaces.Initializer;
 import com.openwes.opsflow.action.ActionName;
-import com.openwes.opsflow.transition.LoginProcessor;
+import com.openwes.opsflow.transition.ScanBadgeProcessor;
 import com.openwes.statemachine.StateFlow;
 import com.openwes.statemachine.StateFlowManager;
 import com.openwes.statemachine.Transition;
@@ -27,7 +27,7 @@ public class BaseOpsFlowInitializer implements Initializer {
                         .addTransition(Transition.fromAny()
                                 .setAction(ActionName.LOGIN)
                                 .setTo("LOGIN")
-                                .setProcessor(LoginProcessor.class)
+                                .setProcessor(ScanBadgeProcessor.class)
                                 .setDestroyOnComplete(true)))
                 //Workflow of BaseWorkingSession
                 .register(StateFlow.create(BaseWorkingSession.class.getName())

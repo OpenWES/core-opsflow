@@ -1,32 +1,30 @@
 package com.openwes.opsflow.api;
 
-import com.openwes.core.utils.Validate;
 import com.openwes.opsflow.NoneCacheActor;
 import com.openwes.opsflow.action.LoginAction;
-import com.openwes.opsflow.message.LoginMessage;
+import com.openwes.opsflow.message.ScanBadgeMessage;
 import com.openwes.statemachine.ActionEndHandler;
 import com.openwes.statemachine.ActorProps;
 import com.openwes.statemachine.Failure;
 import com.openwes.statemachine.StateFlowManager;
 import com.openwes.web.HttpHandler;
 import com.openwes.web.ResponseMessage;
+import com.openwes.web.annotation.Api;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import io.vertx.core.http.HttpMethod;
 
 /**
  *
  * @author xuanloc0511@gmail.com
  */
-public class LoginHandler extends HttpHandler {
+@Api(method = HttpMethod.POST, path = "/v1/scan/badge")
+public class ScanBadgeHandler extends HttpHandler {
 
     @Override
     public void handle() throws Exception {
-        LoginMessage loginMessage = bodyAsObject(LoginMessage.class);
-        String actorId = loginMessage.getBarcode();
-        if (Validate.isEmpty(loginMessage.getBarcode())) {
-            actorId = loginMessage.getUsername();
-        }
+        ScanBadgeMessage message = bodyAsObject(ScanBadgeMessage.class);
         StateFlowManager.workflow(NoneCacheActor.class.getName())
-                .execute(new LoginAction(actorId, loginMessage)
+                .execute(new LoginAction(message.getData(), message)
                         .setEndHandler(new ActionEndHandler() {
                             @Override
                             public void onCompleted(String actorId, ActorProps props, Object input) {
