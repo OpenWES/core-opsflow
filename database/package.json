@@ -1,6 +1,6 @@
 {
-  "group": "core.openwes.opsflow",
-  "artifact": "database",
+  "group": "com.openwes",
+  "artifact": "opsflow-db",
   "version": "1.0.0-SNAPSHOT",
   "dependencies": []
 }

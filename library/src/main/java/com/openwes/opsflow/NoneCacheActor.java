@@ -8,6 +8,10 @@ import com.openwes.statemachine.Actor;
  */
 public class NoneCacheActor extends Actor {
 
+    public NoneCacheActor(String id, String currentState) {
+        super(id, currentState);
+    }
+
     @Override
     public boolean isCached() {
         return false;

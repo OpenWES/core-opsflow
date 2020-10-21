@@ -8,4 +8,8 @@ import com.openwes.statemachine.Actor;
  */
 public class BaseWorkingSession extends Actor{
 
+    public BaseWorkingSession(String id, String currentState) {
+        super(id, currentState);
+    }
+
 }
